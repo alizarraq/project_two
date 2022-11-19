@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root "pages#home"
+  resources :users, expect: [:new] 
   resources :orders
-   root "pages#home"
+  get 'signup', to: 'users#new'
+
 end
