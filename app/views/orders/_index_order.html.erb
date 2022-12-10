@@ -1,21 +1,28 @@
-<div class="container">
-  <div class="card">
-    <div class="row g-0">
-      <div class="col-sm-4">
-        <img src="https://via.placeholder.com/150" class="h-100 card-img" alt="..." style="object-fit: cover;">
-      </div>
-      <div class="col-sm-8">
-        <div class="card-body">
-          <h5 class="card-title">
-            <a class="link-dark text-decoration-none" href="#" target="_blank"><%= order.title %></a>
-          </h5>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-          <span class="badge rounded-pill bg-dark">Tag1</span>
+<div id="orders">
+<div class="container mt-4">
+  <% @orders.each do |order| %>
+    <div class="card shadow-sm  mb-5 bg-white rounded mb-3" style="max-width: 800px; ">
+      <div class="row no-gutters ">
+        <div class="col-4 ">
+        <% order.images.each do |image| %>
+          <div class="card-img"><%= image_tag image ,style:"width: 280px"%></div>
+          <%break%>
+        <% end %>
         </div>
-        <div class="card-footer text-end text-muted">
-          Last updated today.
+        <div class="col-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= order.category %></h5>
+            <p class="card-text"><%= order.title %></p>
+            <p class="card-text"> writen by :<%= order.user.username %></p>
+            <p class="card-text"><small class="text-muted"><%= order.location %></small></p>
+            <button type="button" class="btn btn-primary" >show</button>
+          </div>
         </div>
       </div>
     </div>
+    <p>
+      <%= link_to "Show this order", order %>
+    </p>
+  <% end %>
   </div>
 </div>

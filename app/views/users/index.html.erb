@@ -1,7 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Users</h1>
-
+  <div class="flickr_pagination">
+  <%= will_paginate  :container => false %>
+</div>
 <div id="users">
   <% @users.each do |user| %>
     <%= render user %>
@@ -9,6 +11,9 @@
       <%= link_to "Show this user", user %>
     </p>
   <% end %>
+</div>
+<div class="flickr_pagination">
+  <%= will_paginate  :container => false %>
 </div>
 
 <%= link_to "New user", new_user_path %>

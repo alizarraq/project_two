@@ -2,35 +2,15 @@
 <p style="color: green"><%= notice %></p>
 
 <h1 class ="text-center mt-4">Listing All Orders</h1>
-
-<div id="orders">
-<div class="container mt-4">
-  <% @orders.each do |order| %>
-    <div class="card shadow-sm  mb-5 bg-white rounded mb-3" style="max-width: 800px; ">
-      <div class="row no-gutters ">
-        <div class="col-4 ">
-        <% order.images.each do |image| %>
-          <div class="card-img"><%= image_tag image ,style:"width: 280px"%></div>
-          <%break%>
-        <% end %>
-        </div>
-        <div class="col-8">
-          <div class="card-body">
-            <h5 class="card-title"><%= order.category %></h5>
-            <p class="card-text"><%= order.title %></p>
-            <p class="card-text"> writen by :<%= order.user.username %></p>
-            <p class="card-text"><small class="text-muted"><%= order.location %></small></p>
-            <button type="button" class="btn btn-primary" >show</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p>
-      <%= link_to "Show this order", order %>
-    </p>
-  <% end %>
-  </div>
+<div class="flickr_pagination">
+  <%= will_paginate  :container => false %>
 </div>
+<%= render 'index_order' %>
+
+<div class="flickr_pagination mb-4">
+  <%= will_paginate  :container => false %>
+</div>
+
 
 <%= link_to "New order", new_order_path %>
 </div>

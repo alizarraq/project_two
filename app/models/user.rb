@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
-  has_many :orders
+  has_many :orders, dependent: :destroy
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PASSWORD_REGEX = /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/
   VALID_PHONE_REGEX = /\A[0-9]{10}\z/

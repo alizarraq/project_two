@@ -1,14 +1,15 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /orders/1 or /orders/1.json
   def show
-    
   end
 
   # GET /orders/new
@@ -23,7 +24,7 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-    @order.user_id = User.first.id
+    @order.user_id = current_user.id
     respond_to do |format|
       if @order.save
         format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
@@ -67,5 +68,11 @@ class OrdersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def order_params
       params.require(:order).permit(:title, :descreption, :price, :location, :category, images: [])
+    end
+    def require_same_user
+      if current_user != @order.user
+        flash[:danger] = "You can only edit or delete your own order"
+        redirect_to root_path
+      end
     end
 end
