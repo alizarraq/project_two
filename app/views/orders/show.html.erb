@@ -3,7 +3,7 @@
 <%= render @order %>
 
 <div>
-<% if logged_in?&& @order.user == current_user %>
+<% if logged_in?&& (@order.user == current_user|| current_user.admin?) %>
   <%= link_to "Edit this order", edit_order_path(@order) %> |
   <%= button_to "Destroy this order", @order, method: :delete %>
   <% end %>

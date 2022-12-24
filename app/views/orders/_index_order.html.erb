@@ -11,18 +11,20 @@
         </div>
         <div class="col-8">
           <div class="card-body">
+          <h5 class="card-title"><%= link_to order.title, order_path(order), class: "text-success" %></h5>
             <h5 class="card-title"><%= order.category %></h5>
             <p class="card-text"><%= order.title %></p>
             <p class="card-text"> writen by :<%= order.user.username %></p>
             <p class="card-text"><small class="text-muted"><%= order.location %></small></p>
-            <button type="button" class="btn btn-primary" >show</button>
+            <%= link_to "View", order_path(order), class: "btn btn-outline-success" %>
+            <% if logged_in? && (order.user == current_user || current_user.admin?) %>
+              <%= link_to "Edit", edit_order_path(order), class: "btn btn-outline-info" %>
+              <%= link_to "Delete", order_path(order), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
-    <p>
-      <%= link_to "Show this order", order %>
-    </p>
   <% end %>
   </div>
 </div>
