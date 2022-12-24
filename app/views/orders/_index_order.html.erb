@@ -3,6 +3,11 @@
   <% @orders.each do |order| %>
     <div class="card shadow-sm  mb-5 bg-white rounded mb-3" style="max-width: 800px; ">
       <div class="row no-gutters ">
+        <div class="card-header font-italic">
+            <% if order.user %>
+              by <%= link_to order.user.username, user_path(order.user) %>
+            <% end %>
+          </div>
         <div class="col-4 ">
         <% order.images.each do |image| %>
           <div class="card-img"><%= image_tag image ,style:"width: 280px"%></div>
