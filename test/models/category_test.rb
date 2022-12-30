@@ -2,6 +2,9 @@ require "test_helper"
 
 class CategoryTest < ActiveSupport::TestCase
 
-  # hell0
+  test "category should be valid" do
+    @category = Category.new(name: "sports")
+    assert @category.valid?
+  end
 
 end

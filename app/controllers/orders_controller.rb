@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:title, :descreption, :price, :location, :category, images: [])
     end
     def require_same_user
-      if current_user != @order.user && !current_user.admin?
+      if current_user != @order.user and !current_user.admin?
         flash[:danger] = "You can only edit or delete your own order"
         redirect_to root_path
       end
