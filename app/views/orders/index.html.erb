@@ -1,16 +1,10 @@
-<div id="page-content">
-<p style="color: green"><%= notice %></p>
 
-<h1 class ="text-center mt-4">Listing All Orders</h1>
+<h1 class="text-center mt-4">Listing all orders</h1>
+
 <div class="flickr_pagination">
-  <%= will_paginate  :container => false %>
+  <%= will_paginate @orders, :container => false %>
 </div>
-<%= render 'index_order' %>
-
+<%= render 'order' %>
 <div class="flickr_pagination mb-4">
-  <%= will_paginate  :container => false %>
-</div>
-
-
-<%= link_to "New order", new_order_path %>
+  <%= will_paginate @orders, :container => false %>
 </div>

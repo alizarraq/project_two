@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:title, :descreption, :price, :location, :category, images: [])
+      params.require(:order).permit(:title, :descreption, :price, :location, category_ids: [], images: [])
     end
     def require_same_user
       if current_user != @order.user and !current_user.admin?
