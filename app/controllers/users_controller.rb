@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :require_user, except: [ :show, :new, :create, :newworker]
+  before_action :require_user, except: [ :new, :create, :newworker]
   before_action :require_same_user, only: [:edit, :update, :destroy]
   before_action :require_admin, only: [:index]
   # GET /users or /users.json

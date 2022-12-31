@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
-  before_action :require_worker_admin, only: [:index]
+  before_action :require_worker_admin, only: %i[ index show]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   # GET /orders or /orders.json
@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
       end
     end
     def require_worker_admin
-      if !logged_in? &&(!current_user.worker?  || !current_user.admin?)
+      if (!current_user.worker?  and !current_user.admin?)
         flash[:danger] = "you are not allowed to see all orders"
         redirect_to root_path
       end
