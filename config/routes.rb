@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users, expect: [:new] 
   resources :orders
   get 'signup', to: 'users#new'
-  get 'worker/signup', to: 'users#newworker'
+  get 'signup/worker', to: 'users#newworker'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'

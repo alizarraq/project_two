@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :require_user, except: [:index, :show, :new, :create]
+  before_action :require_user, except: [ :show, :new, :create, :newworker]
   before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_admin, only: [:index]
   # GET /users or /users.json
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
@@ -9,7 +10,8 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @orders = @user.orders.paginate(page: params[:page], per_page: 5)
+    @all_orders = @user.orders.paginate(page: params[:page], per_page: 5)
+    @orders = @user.orders.by_categories(current_user.categories).paginate(page: params[:page], per_page: 5)
   end
 
   # GET /users/new
@@ -18,6 +20,7 @@ class UsersController < ApplicationController
   end
   def newworker
     @user = User.new
+    
   end
 
   # GET /users/1/edit
@@ -68,12 +71,18 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :email, :password, :address, :phone_number)
+      params.require(:user).permit(:username, :email, :password, :address, :phone_number, category_ids: [])
     end
 
     def require_same_user
       if current_user != @user and !current_user.admin?
         flash[:danger] = "You can only edit or delete your own account"
+        redirect_to root_path
+      end
+    end
+    def require_admin
+      if  !current_user.admin?
+        flash[:danger] = "YOU ARE NOT ADMIN"
         redirect_to root_path
       end
     end

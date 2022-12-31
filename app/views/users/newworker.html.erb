@@ -1,5 +1,4 @@
 <h1>Become a worker </h1>
-
 <%= form_with(model: @user) do |form| %>
   <% if @user.errors.any? %>
     <div style="color: red">
@@ -39,9 +38,15 @@
   </div>
   <div>
   <%= form.label :type, "User Type" %>
-  <%= form.select :type, User.roles.keys, {}, { class: 'form-control' } %>
+  <%= form.select :type, User.roles.keys[1], {}, { class: 'form-control' } %>
   </div>
-  
+  <div class="form-group row">
+    <%= form.label :category, class: "col-2 col-form-label text-light" %>
+    <div class="col-10"> 
+      <%= form.collection_select(:category_ids, Category.all, :id, :name,
+        { prompt: "choose at least one category"}, { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
+    </div>
+  </div>
   <div>
     <%= form.submit %>
   </div>

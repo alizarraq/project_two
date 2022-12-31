@@ -1,48 +1,50 @@
-<%= form_with(model: order) do |form| %>
-  <% if order.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
-
-      <ul>
-        <% order.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :descreption, style: "display: block" %>
-    <%= form.text_area :descreption %>
-  </div>
-
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div>
-    <%= form.label :location, style: "display: block" %>
-    <%= form.text_field :location %>
-  </div>
-  <div class="form-group row">
-          <%= form.label :category, class: "col-2 col-form-label text-light" %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= render 'shared/errors', obj: @order %>
+      <%= form_with(model: @order, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
+        <div class="form-group row">
+          <%= f.label :title, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "Title of order" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :description, class: "col-2 col-form-label text-light" %>
           <div class="col-10"> 
-            <%= form.collection_select(:category_ids, Category.all, :id, :name,
+            <%= f.text_area :description, rows: 10, class: "form-control shadow rounded", placeholder: "Description of order" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :price, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "price of order" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :location, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :location, class: "form-control shadow rounded", placeholder: "location of order" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :category, class: "col-2 col-form-label text-light" %>
+          <div class="col-10"> 
+            <%= f.collection_select(:category_ids, Category.all, :id, :name,
             { prompt: "Make your selection from the list below (can be empty)"}, { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
           </div>
         </div>
-  <div>
-    <%= form.label :images, style: "display: block" %>
-    <%= form.file_field :images, multiple: true %>
+        <div>
+          <%= f.label :images, style: "display: block" %>
+          <%= f.file_field :images, multiple: true %>
+        </div>
+        <div class="form-group row justify-content-center">
+          <%= f.submit class: "btn btn-outline-light btn-lg" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mb-3">
+      <%= link_to '[ Cancel and return ]', root_path, class: "text-info" %>
+    </div>
   </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

@@ -1,4 +1,16 @@
 
+<% if logged_in? &&  current_user.admin? %>
+
+<h1 class="text-center mt-4">Listing all orders</h1>
+
+<div class="flickr_pagination">
+  <%= will_paginate @all_orders, :container => false %>
+</div>
+<%= render 'all_order' %>
+<div class="flickr_pagination mb-4">
+  <%= will_paginate @all_orders, :container => false %>
+</div>
+<%elsif logged_in? &&  current_user.worker?%>
 <h1 class="text-center mt-4">Listing all orders</h1>
 
 <div class="flickr_pagination">
@@ -8,3 +20,6 @@
 <div class="flickr_pagination mb-4">
   <%= will_paginate @orders, :container => false %>
 </div>
+<%else%>
+  <h1 class="text-center mt-4  text-danger">You are not allowed to see all the orders</h1>
+<%end%>
