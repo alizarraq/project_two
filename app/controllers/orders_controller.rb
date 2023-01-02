@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show edit update destroy ]
-  before_action :require_worker_admin, only: %i[ index show]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :set_order, only: %i[ show edit update destroy ] 
+  before_action :require_worker_admin, :require_same_user, only: %i[ show ]
+  before_action :require_worker_admin, only: %i[ index ]
+  before_action :require_same_user, only: %i[ edit update destroy ]
 
   # GET /orders or /orders.json
   def index

@@ -13,9 +13,9 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if params[:commit] == "Approve"
-      @comment.status = Comment::STATUS_APPROVED
+      @comment.status = "approved"
     else
-      @comment.status = Comment::STATUS_DECLINED
+      @comment.status = "declined"
     end
     if @comment.save
       redirect_to @comment.order, notice: "Comment updated successfully"
