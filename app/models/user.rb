@@ -2,13 +2,10 @@ class User < ApplicationRecord
   has_many :user_categories
   has_many :categories, through: :user_categories
   has_many :orders, dependent: :destroy
-  before_save do 
-    self.user_categories.build(category: Category.find_by(name: 'travel')) if self.categories.blank?
-  end
+  has_many :comments, dependent: :destroy
   
   enum role: %i(user worker admin) , _default: "user"
-
-  before_save { self.email = email.downcase}
+  
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PASSWORD_REGEX = /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/
   VALID_PHONE_REGEX = /\A[0-9]{10}\z/
@@ -18,6 +15,11 @@ class User < ApplicationRecord
   validates :phone_number, presence: true, length: {minimum:10}, format: {with: VALID_PHONE_REGEX}
   
   has_secure_password
+  
+  before_save do 
+    self.email = email.downcase
+    self.user_categories.build(category: Category.find_by(name: 'travel')) if self.categories.blank?
+  end
 
   private
 

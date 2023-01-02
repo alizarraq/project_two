@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
   resources :categories, except: [:destroy]
+  resources :comments, only: [:update]
+  resources :orders do
+    resources :comments, only: [:create]
+  end
+
 end

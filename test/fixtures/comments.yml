@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  order_id: 1
+  worker_id: 1
+  content: MyText
+  price: 9.99
+  date: 2023-01-01
+  status: MyString
+
+two:
+  id: 1
+  order_id: 1
+  worker_id: 1
+  content: MyText
+  price: 9.99
+  date: 2023-01-01
+  status: MyString

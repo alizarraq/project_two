@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1 or /orders/1.json
   def show
+    @comment = Comment.new
   end
 
   # GET /orders/new
