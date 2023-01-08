@@ -9,4 +9,5 @@ class Order < ApplicationRecord
   scope :by_categories, -> (categories) {
     joins(:categories).where(categories: { id: categories })
   }
+  has_one :active_order
 end

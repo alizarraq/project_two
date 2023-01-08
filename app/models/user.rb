@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :categories, through: :user_categories
   has_many :orders, dependent: :destroy
   has_many :comments, dependent: :destroy
-  
+  has_many :active_orders
   enum role: %i(user worker admin) , _default: "user"
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

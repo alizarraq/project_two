@@ -1,3 +1,4 @@
+<%= render "shared/flash_messages" %>
 <h2 class="text-center mt-4"><%= @order.title %></h2>
 
 <div class="container">
@@ -16,7 +17,7 @@
           <h6 class="card-text"><%= truncate(@order.location) %></h6>
           <h6 class="card-text"><%= @order.price %></h6>
           <% if logged_in? && (@order.user == current_user || current_user.admin?) %>
-          <%= link_to "Edit", edit_order_path(@order), class: "btn btn-outline-info" %>
+          <%= link_to "Edit", edit_order_path(@order), class: "btn btn-outline-info", data: {confirm: "Are you sure?"} %>
           <%= link_to "Delete", order_path(@order), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
           <% end %>
         </div>
@@ -41,6 +42,8 @@
           </div>
           <div class="card-body"> 
             <p class="card-text"><%= comment.content %></p>
+            <p class="card-text"><%= comment.price %></p>
+            <p class="card-text"><%= comment.date.to_s %></p>
             <%= form_with model: comment, url: comment_path(comment), method: :patch do |form| %>
               <%= form.submit "Approve" %>
               <%= form.submit "Decline" %>

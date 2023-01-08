@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
+  before_action :require_user
   before_action :set_order, only: %i[ show edit update destroy ] 
-  before_action :require_worker_admin, :require_same_user, only: %i[ show ]
-  before_action :require_worker_admin, only: %i[ index ]
-  before_action :require_same_user, only: %i[ edit update destroy ]
+  before_action :require_same_user,only: %i[ show ]
+  # before_action :require_worker_admin, only: %i[ index ]
+  before_action :require_same_user, only: %i[edit update destroy ]
 
   # GET /orders or /orders.json
   def index
@@ -30,8 +31,8 @@ class OrdersController < ApplicationController
     @order.user_id = current_user.id
     respond_to do |format|
       if @order.save
-        format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
+        format.html { redirect_to order_url(@order), success: "Order was successfully created." }
+        
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -55,9 +56,8 @@ class OrdersController < ApplicationController
   # DELETE /orders/1 or /orders/1.json
   def destroy
     @order.destroy
-
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
+      format.html { redirect_to orders_url, error: "Order was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -79,7 +79,7 @@ class OrdersController < ApplicationController
       end
     end
     def require_worker_admin
-      if (!current_user.worker?  and !current_user.admin?)
+      if (!logged_in? and !current_user.worker?  and !current_user.admin?)
         flash[:danger] = "you are not allowed to see all orders"
         redirect_to root_path
       end
