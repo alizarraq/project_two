@@ -1,25 +1,25 @@
-  <div class="container">
-  <% @active_orders.each do |active_order| %>
-    <div class="row justify-content-md-center">
-      <div class="col-8 mt-4">
-        <div class="card text-center shadow mb-5 bg-white rounded">
-          <div class="card-header font-italic">
-            The worker <%= link_to active_order.worker.username, user_path(active_order.worker) %>
-            <br>
-            The customer <%= link_to active_order.user.username, user_path(active_order.user) %>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">title<%= active_order.title %></h5>
-            <p class="card-text">the description: <%= active_order.descreption %></p>
-            <h6 class="card-text">The loction is <%= active_order.location %></h6>
-            <h6 class="card-text">The price is <%= active_order.c_price %></h6>
-            <h6 class="card-text">The time  <%= active_order.date.to_s %></h6>
-          </div>
-          <div class="card-footer text-muted">
-            <small>Created <%= time_ago_in_words(active_order.created_at) %> ago, 
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
+ <% if logged_in? &&  current_user.admin? %>
+
+<h1 class="text-center mt-4">Listing all active orders</h1>
+
+<div class="flickr_pagination">
+  <%= will_paginate @all_active_orders, :container => false %>
 </div>
+<%= render 'all_active_orders' %>
+<div class="flickr_pagination mb-4">
+  <%= will_paginate @all_active_orders, :container => false %>
+</div>
+<%elsif logged_in? %>
+<h1 class="text-center mt-4">Listing all active orders</h1>
+
+<div class="flickr_pagination">
+  
+</div>
+<%= render 'active_orders' %>
+<div class="flickr_pagination mb-4">
+
+</div>
+<%else%>
+  <h1 class="text-center mt-4  text-danger">You are not allowed to see all the orders</h1>
+<%end%>
+

@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   resources :orders do
     resources :comments, only: [:create]
   end
-  get 'active_orders', to: 'active_orders#index'
+  resources 'active_orders', except: [:new, :create]
 end

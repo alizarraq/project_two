@@ -1,0 +1,70 @@
+<%if logged_in?  %>
+<%if @active_order.status == "active" %>
+  
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-8 mt-4">
+      <div class="card text-center shadow mb-5 bg-white rounded">
+        <div class="card-header font-italic">
+          The worker <%= link_to @active_order.worker.username, user_path(@active_order.worker) %>
+            <br>
+          The customer <%= link_to @active_order.user.username, user_path(@active_order.user) %>
+        </div>
+        <div class="card-body">
+          <div class="card-body">
+           <h5 class="card-title">title <%= @active_order.title %></h5>
+           <h5 class="card-title">status <%= @active_order.status %></h5>
+            <p class="card-text">the description: <%= @active_order.descreption %></p>
+            <h6 class="card-text">The loction is <%= @active_order.location %></h6>
+            <h6 class="card-text">The price is <%= @active_order.c_price %></h6>
+            <h6 class="card-text">The time  <%= @active_order.date.to_s %></h6>
+            <small>time remaining <%= distance_of_time_in_words(Time.current, @active_order.date) %> </small> 
+            <%= form_with(model: @active_order, method: :patch, local: true) do |form| %>
+              <%= form.hidden_field :status, value: "finished" %>
+              <%= form.submit "Finish Order", class: "btn btn-primary" %>
+            <% end %>
+            <%if current_user.worker? || current_user.admin? %>
+            <%end%>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%elsif @active_order.status == "finished"%>
+  <div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-8 mt-4">
+      <div class="card text-center shadow mb-5 bg-white rounded">
+        <div class="card-header font-italic">
+          The worker <%= link_to @active_order.worker.username, user_path(@active_order.worker) %>
+            <br>
+          The customer <%= link_to @active_order.user.username, user_path(@active_order.user) %>
+        </div>
+        <div class="card-body">
+          <div class="card-body">
+           <h5 class="card-title">title <%= @active_order.title %></h5>
+           <h5 class="card-title">status <%= @active_order.status %></h5>
+            <p class="card-text">the description: <%= @active_order.descreption %></p>
+            <h6 class="card-text">The loction is <%= @active_order.location %></h6>
+            <h6 class="card-text">The price is <%= @active_order.c_price %></h6>
+            <h6 class="card-text">The time  <%= @active_order.date.to_s %></h6>
+            <small>time remaining <%= distance_of_time_in_words(Time.current, @active_order.date) %> </small> 
+            <%= form_with(model: @active_order, method: :patch, local: true) do |form| %>
+              <%= form.hidden_field :status, value: "finished" %>
+              <%= form.submit "Finish Order", class: "btn btn-primary" %>
+            <% end %>
+            <%if current_user.worker? || current_user.admin? %>
+            <%end%>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%end%>
+<%else%>
+your not allwoed to see this page
+<%end%>

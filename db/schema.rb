@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_07_211116) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_221431) do
   create_table "active_orders", force: :cascade do |t|
     t.integer "user_id"
     t.integer "worker_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_211116) do
     t.string "images"
     t.integer "c_price"
     t.date "date"
+    t.string "status", default: "active"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
