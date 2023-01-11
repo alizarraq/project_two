@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  mount_uploader :image, ImageUploader
   belongs_to :user
   has_many :order_categories
   has_many :categories, through: :order_categories
