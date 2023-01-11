@@ -1,3 +1,4 @@
+
 <%= render "shared/flash_messages" %>
 <h2 class="text-center mt-4"><%= @order.title %></h2>
 
@@ -7,14 +8,35 @@
       <div class="card text-center shadow mb-5 bg-white rounded">
         <div class="card-header font-italic">
           by <%= @order.user.username if @order.user %>
-          <%= link_to gravatar_for(@order.user), user_path(@order.user) %>
+          <div id="carouselExampleControls" class="carousel slide carousel-fade my-custom-class" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <% @order.images.each_with_index do |image, index| %>
+                <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>"></li>
+              <% end %>
+            </ol>
+            <div class="carousel-inner">
+              <% @order.images.each_with_index do |image, index| %>
+                <div class="carousel-item <%= 'active' if index == 0 %>">
+                  <%= image_tag image, class: "d-block w-100"%>
+                </div>
+              <% end %>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only"></span>
+            </a>
+          </div>
           <% if @order.categories.any? %>
             <div class="mt-2"><%= render @order.categories %></div> 
           <% end %>
         </div>
         <div class="card-body">
           <div class="card-text text-left"><%= simple_format(@order.descreption) %></div>
-          <h6 class="card-text"><%= truncate(@order.location) %></h6>
+          <h6 class="card-text"><%= @order.location %></h6>
           <h6 class="card-text"><%= @order.price %></h6>
           <% if logged_in? && (@order.user == current_user || current_user.admin?) %>
           <%= link_to "Edit", edit_order_path(@order), class: "btn btn-outline-info", data: {confirm: "Are you sure?"} %>
@@ -29,9 +51,21 @@
     </div>
   </div>
 </div>
-  <% @order.images.each do |image| %>
-    <div><%= image_tag%></div>
-  <% end %>
+
+
+
+  <div class="row">
+    <% @order.images.each do |image| %>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <%= image_tag image, class: "card-img-top" %>
+          <div class="card-body">
+            <p class="card-text"> Image caption</p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div> 
 
 <h2 class="text-center mt-4">Offers</h2>
 
@@ -84,4 +118,10 @@
     </div>
 </div>
 <%end%>
+
+
+
+
+
+
 

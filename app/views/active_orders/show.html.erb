@@ -1,5 +1,5 @@
 <%if logged_in?  %>
-<%if @active_order.status == "active" %>
+
   
 <div class="container">
   <div class="row justify-content-md-center">
@@ -32,7 +32,7 @@
     </div>
   </div>
 </div>
-<%elsif @active_order.status == "finished"%>
+
   <div class="container">
   <div class="row justify-content-md-center">
     <div class="col-8 mt-4">
@@ -64,7 +64,4 @@
     </div>
   </div>
 </div>
-<%end%>
-<%else%>
-your not allwoed to see this page
 <%end%>

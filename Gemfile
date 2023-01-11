@@ -62,6 +62,10 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery'
+end
+gem 'jquery-rails'
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"

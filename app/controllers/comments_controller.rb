@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     if @comment.save
       if @comment.status == "approved"
         active_order = ActiveOrder.new(user_id: @comment.order.user_id, worker_id: @comment.worker_id, 
-        order_id: @comment.order_id, title: @comment.order.title, descreption: @comment.order.descreption, location: @comment.order.location, category: @comment.order.categories, 
+        order_id: @comment.order_id, title: @comment.order.title, descreption: @comment.order.descreption, location: @comment.order.location, category: @comment.order.categories, images: @comment.order.images, 
         c_price: @comment.price, date: @comment.date)
         active_order.save
         @comment.order.destroy

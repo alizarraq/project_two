@@ -1,5 +1,5 @@
 class ActiveOrdersController < ApplicationController
-  before_action :set_active_order
+
   def index
     @active_orders = ActiveOrder.where("user_id = ? OR worker_id = ?", current_user.id, current_user.id)
     @all_active_orders = ActiveOrder.paginate(page: params[:page], per_page: 5)
@@ -8,8 +8,6 @@ class ActiveOrdersController < ApplicationController
   def show
     
   end
-  
-    # Use callbacks to share common setup or constraints between actions.
 
   def edit
   end
@@ -24,10 +22,7 @@ class ActiveOrdersController < ApplicationController
   end
   
   private
-  
-  def set_active_order
-    @active_order = ActiveOrder.find(params[:id])
-  end
+
 
   def active_order_params
     params.require(:active_order).permit(:status)

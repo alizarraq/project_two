@@ -2,12 +2,12 @@ class OrdersController < ApplicationController
   before_action :require_user
   before_action :set_order, only: %i[ show edit update destroy ] 
   before_action :require_same_user,only: %i[ show ]
-  # before_action :require_worker_admin, only: %i[ index ]
+  before_action :require_worker_admin, only: %i[ index ]
   before_action :require_same_user, only: %i[edit update destroy ]
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.by_categories(current_user.categories).where(location: current_user.address).paginate(page: params[:page], per_page: 5)
+    @orders = Order.by_categories(current_user.categories).paginate(page: params[:page], per_page: 5)
     @all_orders = Order.paginate(page: params[:page], per_page: 5)
   end
 
