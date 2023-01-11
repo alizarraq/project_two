@@ -29,7 +29,9 @@
     </div>
   </div>
 </div>
-  <%= image_tag @order.image_url %>
+  <% @order.images.each do |image| %>
+    <div><%= image_tag%></div>
+  <% end %>
 
 <h2 class="text-center mt-4">Offers</h2>
 
