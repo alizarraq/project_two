@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :active_orders
   enum role: %i(user worker admin) , _default: "user"
+  enum address: ["Amman", "Irbid", "Zarqa", "Mafraq", "Ajloun", "Jerash", "Madaba", "Balqa", "Karak", "Tafileh", "Maan", "Aqaba"]
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PASSWORD_REGEX = /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/

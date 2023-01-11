@@ -17,10 +17,10 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    
   end
   def newworker
     @user = User.new
-    
   end
 
   # GET /users/1/edit
@@ -71,18 +71,18 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :email, :password, :address, :phone_number, category_ids: [])
+      params.require(:user).permit(:username, :email, :password, :address, :phone_number, :role, category_ids: [])
     end
 
     def require_same_user
       if current_user != @user and !current_user.admin?
-        flash[:danger] = "You can only edit or delete your own account"
+        flash[:error] = "You can only edit or delete your own account"
         redirect_to root_path
       end
     end
     def require_admin
       if  !current_user.admin?
-        flash[:danger] = "YOU ARE NOT ADMIN"
+        flash[:error] = "YOU ARE NOT ADMIN"
         redirect_to root_path
       end
     end

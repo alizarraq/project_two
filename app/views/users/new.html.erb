@@ -1,6 +1,17 @@
-<h1>Sign up for 7 crafts </h1>
+<%= render "shared/flash_messages" %>
+
+<h1 class="text-center mt-4">Sign up for 7 crafts</h1>
 
 <%= render "form", user: @user %>
 
-<br>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-10">
+  already have an account <%= link_to "Log in", login_path, class: "text-info" %>
+  <br>
+  <br>
+  Do want to become a worker <%= link_to "Sign up", "signup/worker", class: "text-info" %>
+</div>
+</div>
+</div>
 

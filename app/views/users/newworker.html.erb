@@ -1,53 +1,14 @@
-<h1>Become a worker </h1>
-<%= form_with(model: @user) do |form| %>
-  <% if @user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being created:</h2>
+<%= render "shared/flash_messages" %>
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<h1 class="text-center mt-4">Become a worker</h1>
 
-  <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
-  </div>
+<%= render "form", user: @user %>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.text_field :password %>
-  </div>
-
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div>
-    <%= form.label :phone_number, style: "display: block" %>
-    <%= form.text_field :phone_number %>
-  </div>
-  <div>
-  <%= form.label :type, "User Type" %>
-  <%= form.select :type, User.roles.keys[1], {}, { class: 'form-control' } %>
-  </div>
-  <div class="form-group row">
-    <%= form.label :category, class: "col-2 col-form-label text-light" %>
-    <div class="col-10"> 
-      <%= form.collection_select(:category_ids, Category.all, :id, :name,
-        { prompt: "choose at least one category"}, { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
-    </div>
-  </div>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-10">
+  already have an account <%= link_to "Log in", login_path, class: "text-info" %>
+  <br>
+</div>
+</div>
+</div>

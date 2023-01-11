@@ -9,43 +9,47 @@
             <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "Title of order" %>
           </div>
         </div>
+        <br>
         <div class="form-group row">
           <%= f.label :descreption, class: "col-2 col-form-label text-light" %>
           <div class="col-10"> 
             <%= f.text_area :descreption, rows: 10, class: "form-control shadow rounded", placeholder: "Description of order" %>
           </div>
         </div>
+        <br>
         <div class="form-group row">
           <%= f.label :price, class: "col-2 col-form-label text-light" %>
           <div class="col-10">
             <%= f.text_field :price, class: "form-control shadow rounded", placeholder: "price of order" %>
           </div>
         </div>
+        <br>
         <div class="form-group row">
           <%= f.label :location, class: "col-2 col-form-label text-light" %>
           <div class="col-10">
-            <%= f.label :location %>
-            <%= f.select :location, options_for_select(["Amman", "Irbid", "Zarqa","Mafraq", "Ajloun", "Jerash","Madaba", "Balqa", "Karak","Tafileh", "Maan", "Aqaba"]) %>
+            <%= f.select :address, Order.locations.keys,{ }, {class: "form-control"} %>
           </div>
         </div>
+        <br>
         <div class="form-group row">
           <%= f.label :category, class: "col-2 col-form-label text-light" %>
-          <div class="col-10"> 
+          <div class="col-10 "> 
             <%= f.collection_select(:category_ids, Category.all, :id, :name,
-            { prompt: "Make your selection from the list below (can be empty)"}, { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
+            {}, { multiple: true, size: 3, class: "custom-select shadow rounded form-control" }) %>
           </div>
         </div>
-        <div>
-          <%= f.label :images, style: "display: block" %>
+        <br>
+        <div class="form-group row">
+          <%= f.label :images, class: "col-2 col-form-label text-light" %>
+          <div class="col-10 "> 
           <%= f.file_field :images, multiple: true %>
+          </div>
         </div>
+        <br>
         <div class="form-group row justify-content-center">
           <%= f.submit class: "btn btn-outline-light btn-lg" %>
         </div>
-      <% end %>
-    </div>
-    <div class="mb-3">
-      <%= link_to '[ Cancel and return ]', root_path, class: "text-info" %>
+      <%end%>
     </div>
   </div>
 </div>
