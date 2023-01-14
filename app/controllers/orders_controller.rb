@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ] 
   before_action :require_same_user,only: %i[ show ]
   before_action :require_worker_admin, only: %i[ index ]
-  before_action :require_same_user, only: %i[edit update destroy ]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   # GET /orders or /orders.json
   def index
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         format.html { redirect_to order_url(@order), success: "Order was successfully created." }
-        
+        format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -56,10 +56,8 @@ class OrdersController < ApplicationController
   # DELETE /orders/1 or /orders/1.json
   def destroy
     @order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, error: "Order was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    flash[:error] = "Order was successfully destroyed."
+    redirect_to root_path
   end
 
   private

@@ -14,4 +14,5 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
   resources 'active_orders', except: [:new, :create]
+  get 'pending', to: 'comments#p_offers'
 end

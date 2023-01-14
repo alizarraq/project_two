@@ -1,4 +1,6 @@
- <% if logged_in? &&  current_user.admin? %>
+ <%= render "shared/flash_messages" %>
+
+<% if logged_in? &&  current_user.admin? %>
 
 <h1 class="text-center mt-4">Listing all active orders</h1>
 

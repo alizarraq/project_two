@@ -35,6 +35,9 @@
             <%= button_to "Destroy this user", user_path(current_user), form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
           </div>
         </li>
+        <% if current_user.worker?%>
+        <%= link_to 'pending offers', pending_path, class: "nav-link" %>
+        <% end %>
         <li class="nav-item">
           <%= link_to 'Logout', logout_path, class: "nav-link", method: :delete %>
         </li>
