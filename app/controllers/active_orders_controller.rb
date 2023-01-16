@@ -6,6 +6,8 @@ class ActiveOrdersController < ApplicationController
     end
 
   def show
+    @w_rating = Rating.find_by(user_id: @active_order.user.id, rater_id: current_user.id)
+    @u_rating = Rating.find_by(user_id: @active_order.worker.id, rater_id: current_user.id)
   end
   
     # Use callbacks to share common setup or constraints between actions.

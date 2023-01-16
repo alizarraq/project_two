@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy'
   resources :categories, except: [:destroy]
   resources :comments, only: [:update]
+  resources 'active_orders', except: [:new, :create]
+  get 'pending', to: 'comments#p_offers'
+  resources :ratings, only: [:new, :create, :index]
   resources :orders do
     resources :comments, only: [:create]
   end
-  resources 'active_orders', except: [:new, :create]
-  get 'pending', to: 'comments#p_offers'
 end

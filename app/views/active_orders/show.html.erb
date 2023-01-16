@@ -53,13 +53,22 @@
             <h6 class="card-text">The loction is <%= @active_order.location %></h6>
             <h6 class="card-text">The price is <%= @active_order.c_price %></h6>
             <h6 class="card-text">expected time to finsh  <%= @active_order.date.to_s %></h6>
+            <%if @active_order.status== "active"%>
             <small>time remaining <%= distance_of_time_in_words(Time.current, @active_order.date) %> </small> 
-            
+            <%end%>
             <br>
-            <%if current_user.worker? || current_user.admin? %>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">
-                Rate User
-              </button>
+              <%if current_user.worker?  %>
+                <% if @w_rating %>
+                  <p>Your rating for this user: <%= @w_rating.rating %> </p>
+                <% else %>
+                <%= link_to "Rate this user", new_rating_path(user_id: @active_order.user.id), class: "btn btn-primary" %>
+              <%end%>
+              <%else%>
+              <% if @u_rating %>
+              <p>Your rating for this user: <%= @u_rating.rating %> </p>
+              <% else %>
+                <%= link_to "Rate this user", new_order_path(user_id: @active_order.worker.id), class: "btn btn-primary" %>
+              <% end %>
             <%end%>
           </div>
         </div>

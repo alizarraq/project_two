@@ -12,6 +12,8 @@ class UsersController < ApplicationController
   def show
     @all_orders = @user.orders.paginate(page: params[:page], per_page: 5)
     @orders = @user.orders.by_categories(current_user.categories).paginate(page: params[:page], per_page: 5)
+    @average_rating = @user.ratings.average(:rating)
+    @ratings = Rating.where(user_id: @user.id)
   end
 
   # GET /users/new
