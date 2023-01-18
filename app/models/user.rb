@@ -4,9 +4,8 @@ class User < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :active_orders
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
   enum role: %i(user worker admin) , _default: "user"
-  enum address: ["Amman", "Irbid", "Zarqa", "Mafraq", "Ajloun", "Jerash", "Madaba", "Balqa", "Karak", "Tafileh", "Maan", "Aqaba"]
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PASSWORD_REGEX = /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/
@@ -20,12 +19,12 @@ class User < ApplicationRecord
   
   before_save do 
     self.email = email.downcase
-    self.user_categories.build(category: Category.find_by(name: 'travel')) if self.categories.blank?
+    self.user_categories.build(category: Category.find_by(name: 'دهان')) if self.categories.blank?
   end
 
   private
 
   def set_default_category
-    self.user_categories.build(category: Category.find_by(name: 'travel')) if self.categories.blank?
+    self.user_categories.build(category: Category.find_by(name: 'دهان')) if self.categories.blank?
   end
 end

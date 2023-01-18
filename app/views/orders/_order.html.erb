@@ -18,7 +18,7 @@
             <%= link_to "View", order_path(order), class: "btn btn-outline-success" %>
             <% if logged_in? && (order.user == current_user || current_user.admin?) %>
               <%= link_to "Edit", edit_order_path(order), class: "btn btn-outline-info" %>
-              <%= link_to "Delete", order_path(order), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+              <%= button_to "Destroy this order", order_path(order), form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete, class: "btn btn-outline-danger" %>
             <% end %>
           </div>
           <div class="card-footer text-muted">
