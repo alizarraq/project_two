@@ -22,7 +22,7 @@
 }
 
 .jumbotron {
-  background-image: url("home.jpg");
+  background-image: url("worker1.webp");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -32,7 +32,6 @@
 html,
 body {
   height: 100%;
-  background-color: #ff0084;
 }
 
 #page-content {
@@ -40,7 +39,8 @@ body {
   background-color: lightgrey;
 }
 .footer {
-  background-color: #ff0084;
+  height: 50px;
+  margin-top: -50px;
 }
 
 

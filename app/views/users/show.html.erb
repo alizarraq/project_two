@@ -1,3 +1,17 @@
+<style>
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+  tr:nth-child(even) {
+  background-color: yellow;
+}
+
+   tr:nth-child(odd) {
+    background-color: white;
+    }
+}
+</style>
+
 <%= render "shared/flash_messages" %>
 
 <h1 class="text-center mt-4"><%= @user.username %>'s profile</h1>
@@ -36,8 +50,8 @@
 <% end %>
   <h3 class="text-center mt-4">Reviews</h3>
 
-<table class="table table-striped">
-  <thead>
+<table  class="center table  w-75 ">
+  <thead class="table-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Rater</th>
