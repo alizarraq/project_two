@@ -39,10 +39,10 @@ body {
   flex: 1 0 auto;
   background-color: lightgrey;
 }
-
-#sticky-footer {
-  flex-shrink: none;
+.footer {
+  background-color: #ff0084;
 }
+
 
 .flickr_pagination {
   text-align: center;
@@ -75,7 +75,3 @@ body {
     margin-right: 1em; }
   .flickr_pagination .next_page {
     margin-left: 1em; }
-    .alert-dismissible {
-      padding-left: $close-font-size + $alert-padding-x * 2;
-    }
-    

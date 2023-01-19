@@ -67,7 +67,7 @@
               <% if @u_rating %>
               <p>Your rating for this user: <%= @u_rating.rating %> </p>
               <% else %>
-                <%= link_to "Rate this user", new_order_path(user_id: @active_order.worker.id), class: "btn btn-primary" %>
+                <%= link_to "Rate this user", new_rating_path(user_id: @active_order.worker.id), class: "btn btn-primary" %>
               <% end %>
             <%end%>
           </div>
