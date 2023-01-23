@@ -2,13 +2,6 @@
 table.center {
   margin-left: auto; 
   margin-right: auto;
-  tr:nth-child(even) {
-  background-color: yellow;
-}
-
-   tr:nth-child(odd) {
-    background-color: white;
-    }
 }
 </style>
 
@@ -17,12 +10,16 @@ table.center {
 <h1 class="text-center mt-4"><%= @user.username %>'s profile</h1>
 
 <%= gravatar_for @user, size: 200 %>
+<%if @user.ratings.count>0 %>
   <h3 class="text-center mt-4">rating: <%= @average_rating %> stars</h3>
+  <h2 class="text-center mt-4"> <%= @user.ratings.count%> users</h2>
+  <%end%>
 <% if logged_in? && (@user == current_user || current_user.admin?) %>
   <div class="text-center mt-4">
     <%= link_to "Edit your profile", edit_user_path(@user), class: "btn btn-outline-info" %>
   </div>
 
+<%if @user.orders.count>0 %>
 <h3 class="text-center mt-4">Orders</h3>
 
 <div class="flickr_pagination">
@@ -34,6 +31,7 @@ table.center {
 <div class="flickr_pagination mb-4">
   <%= will_paginate @all_orders, :container => false %>
 </div>
+<%end%>
 
 <% elsif logged_in? && (current_user.worker? )  %>
 <h3 class="text-center mt-4">Orders</h3>
@@ -48,7 +46,8 @@ table.center {
   <%= will_paginate @orders, :container => false %>
 </div>
 <% end %>
-  <h3 class="text-center mt-4">Reviews</h3>
+<%if @user.ratings.count>0 %>
+<h3 class="text-center mt-4">Reviews</h3>
 
 <table  class="center table  w-75 ">
   <thead class="table-dark">
@@ -72,3 +71,4 @@ table.center {
   <% end %>
   </tbody>
 </table>
+<%end%>

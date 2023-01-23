@@ -1,0 +1,1 @@
+phonelib.default_country = "JO"

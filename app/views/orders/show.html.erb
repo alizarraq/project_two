@@ -69,6 +69,7 @@
             <p class="card-text"><%= comment.content %></p>
             <p class="card-text"><%= comment.price %></p>
             <p class="card-text"><%= comment.date.to_s %></p>
+            <p class="card-text"><%= comment.user.phone_number %></p>
             <%= form_with model: comment, url: comment_path(comment), method: :patch do |form| %>
             <% if logged_in? && (@order.user == current_user ) %>
               <%= form.submit "Approve" %>

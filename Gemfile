@@ -55,6 +55,8 @@ gem "image_processing", "~> 1.2"
 
 gem "devise"
 
+gem 'phonelib'
+
 gem 'carrierwave', '~> 2.0'
 
 group :development, :test do
@@ -75,6 +77,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem 'material_icons'
 end
 
 group :test do

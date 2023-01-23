@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :categories, through: :user_categories
   has_many :orders, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :active_orders
+  has_many :active_orders, dependent: :destroy
   has_many :ratings, dependent: :destroy
   enum role: %i(user worker admin) , _default: "user"
   

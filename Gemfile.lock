@@ -133,6 +133,8 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    material_icons (4.0.0)
+      railties (>= 3.2)
     matrix (0.4.2)
     method_source (1.0.0)
     mini_magick (4.11.0)
@@ -151,6 +153,7 @@ GEM
     nokogiri (1.13.9-arm64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    phonelib (0.7.6)
     public_suffix (5.0.0)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -186,7 +189,6 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
-    ratyrate (1.2.2.alpha)
     redis (4.8.0)
     regexp_parser (2.6.0)
     reline (0.3.1)
@@ -258,10 +260,11 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jsbundling-rails
+  material_icons
+  phonelib
   puma (~> 5.0)
   rails (~> 7.0.4)
   rails-assets-jquery!
-  ratyrate
   redis (~> 4.0)
   selenium-webdriver
   sprockets-rails
