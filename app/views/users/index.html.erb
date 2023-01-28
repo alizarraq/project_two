@@ -1,12 +1,14 @@
 <link
       href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet"
-    />
-    <%= render "shared/flash_messages" %>
+/>
+<%= render "shared/flash_messages" %>
 
 <h1 class="text-center mt-4">Users</h1>
 <h4 class="text-center mt-4">Total number of users: <%= @users.count %></h4> 
-
+<div class="flickr_pagination">
+  <%= will_paginate @all_orders, :container => false %>
+</div>
 <div class="container">
       <!-- Table -->
       <div class="table-responsive" >

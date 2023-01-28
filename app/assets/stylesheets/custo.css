@@ -31,13 +31,11 @@
 
 #page-content {
   flex: 1 0 auto;
-  background: linear-gradient(90deg, rgba(16,221,223,1) 0%, rgba(184,39,138,0.7609637605042017) 67%); 
-
 }
 html,
 body {
   height: 100%;
-  background: linear-gradient(90deg, rgba(16,221,223,1) 0%, rgba(184,39,138,0.7609637605042017) 67%); 
+  background: linear-gradient(to right, #304352, #d7d2cc);
 }
 
 

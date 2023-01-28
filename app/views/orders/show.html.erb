@@ -66,14 +66,15 @@
             <h3>by <%= link_to comment.user.username, user_path(comment.user) %></h3>
           </div>
           <div class="card-body"> 
-            <p class="card-text"><%= comment.content %></p>
-            <p class="card-text"><%= comment.price %></p>
-            <p class="card-text"><%= comment.date.to_s %></p>
-            <p class="card-text"><%= comment.user.phone_number %></p>
+            <h3 class="card-text">Worker rating: <%= comment.user.ratings.average(:rating) %> stars</h3>
+            <p class="card-text">Descreption: <%= comment.content %></p>
+            <p class="card-text">Price:<%= comment.price %></p>
+            <p class="card-text">Phone number: <%= comment.user.phone_number %></p>
+            <p class="card-text">expected finish date <%= comment.date.to_s %></p>
             <%= form_with model: comment, url: comment_path(comment), method: :patch do |form| %>
             <% if logged_in? && (@order.user == current_user ) %>
-              <%= form.submit "Approve" %>
-              <%= form.submit "Decline" %>
+              <%= form.submit "Approve",class: "btn btn-outline-success" %>
+              <%= form.submit "Decline" ,class: "btn btn-outline-danger"%>
             <% end %>
             <%end %>
           </div>

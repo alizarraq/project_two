@@ -1,8 +1,30 @@
 <%= render "shared/flash_messages" %>
-<%= form_for @rating do |f| %>
+  <h1 class="text-center mt-4">Rating</h1>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+<%= form_with(model: @rating, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
   <%= f.hidden_field :user_id, value: params[:user_id] %>
   <%= f.hidden_field :rater_id, value: current_user.id %>
-  <%= f.label :rating %>
-  <%= f.number_field :rating %>
-  <%= f.submit %>
+  <div class="form-group row" >
+  <%= f.label :rating, class: "col-2 col-form-label text-light" %>
+  <div class="col-9 ">
+  <%= f.select :rating, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]], {}, { class: 'form-control shadow rounded' } %>
+  </div>
+  </div>
+  <br>
+  <div class="form-group row" >
+  <%= f.label :comment, class: "col-2 col-form-label text-light" %>
+  <div class="col-9 ">
+  <%= f.text_area :comment, rows: 5, class: "form-control shadow rounded", placeholder: "your review" %>
+  </div>
+  </div>
+  <br>
+  <div class="form-group row justify-content-center ">
+    <%= f.submit class: "btn btn-outline-light btn-lg" %>
+  </div>
 <% end %>
+</div>
+</div>
+</div>
